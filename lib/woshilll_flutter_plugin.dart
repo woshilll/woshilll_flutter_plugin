@@ -12,6 +12,11 @@ class WoshilllFlutterPlugin {
     await channel.invokeMethod("setBrightness", brightness);
   }
 
+  /// 设置屏幕默认
+  static setBrightnessDefault() async {
+    await channel.invokeMethod("setBrightnessDefault");
+  }
+
   /// 获取屏幕亮度
   static getBrightness() async {
     return await channel.invokeMethod("getBrightness");

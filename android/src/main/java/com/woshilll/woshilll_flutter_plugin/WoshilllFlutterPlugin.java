@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import androidx.annotation.NonNull;
 
+import androidx.annotation.Nullable;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -57,6 +58,9 @@ public class WoshilllFlutterPlugin implements FlutterPlugin, MethodCallHandler, 
         case METHOD_SET_CONFIG_NAME:
           configMap.put(call.argument("key"), call.argument("value"));
           break;
+        case METHOD_SET_BRIGHTNESS_DEFAULT_NAME:
+          setBrightness(null);
+          break;
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -91,12 +95,12 @@ public class WoshilllFlutterPlugin implements FlutterPlugin, MethodCallHandler, 
   /**
    * 设置屏幕亮度
    *
-   * @param value 0-1
+   * @param value 0-1 null-default
    */
-  private void setBrightness(Double value) {
+  private void setBrightness(@Nullable Double value) {
     Window window = activity.getWindow();
     WindowManager.LayoutParams lp = window.getAttributes();
-    lp.screenBrightness = value.floatValue();
+    lp.screenBrightness = value == null ? WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE : value.floatValue();
     window.setAttributes(lp);
   }
 
