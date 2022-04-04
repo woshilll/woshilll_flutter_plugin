@@ -9,6 +9,8 @@ public class MethodName {
     public static final String METHOD_GET_BRIGHTNESS_NAME = "getBrightness";
     // 设置配置文件
     public static final String METHOD_SET_CONFIG_NAME = "setConfig";
+    // 设置震动
+    public static final String METHOD_SET_VIBRATION = "setVibration";
     // 物理音量键改变提醒
     public static final String INVOKE_VOLUME_CHANGE_NOTIFY_NAME = "volumeChangeNotify";
 }

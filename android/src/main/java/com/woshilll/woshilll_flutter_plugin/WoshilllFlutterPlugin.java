@@ -1,13 +1,18 @@
 package com.woshilll.woshilll_flutter_plugin;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.res.Resources;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.VibratorManager;
 import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
 import androidx.annotation.NonNull;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -45,6 +50,7 @@ public class WoshilllFlutterPlugin implements FlutterPlugin, MethodCallHandler, 
 
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     try {
@@ -61,10 +67,24 @@ public class WoshilllFlutterPlugin implements FlutterPlugin, MethodCallHandler, 
         case METHOD_SET_BRIGHTNESS_DEFAULT_NAME:
           setBrightness(null);
           break;
+        case METHOD_SET_VIBRATION:
+          setVibration((Integer) call.arguments);
+          break;
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * 设置震动
+   *
+   * @param times 震动时长 毫秒
+   */
+  @RequiresApi(api = Build.VERSION_CODES.O)
+  private void setVibration(Integer times) {
+    VibratorManager vibratorManager = (VibratorManager) activity.getSystemService(Service.VIBRATOR_MANAGER_SERVICE);
+    vibratorManager.getDefaultVibrator().vibrate(VibrationEffect.createOneShot(times, VibrationEffect.DEFAULT_AMPLITUDE));
   }
 
   /**

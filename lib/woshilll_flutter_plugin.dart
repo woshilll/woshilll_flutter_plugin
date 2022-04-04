@@ -22,7 +22,13 @@ class WoshilllFlutterPlugin {
     return await channel.invokeMethod("getBrightness");
   }
 
+  /// 额外配置
   static setConfig(String key, Object value) async {
     await channel.invokeMethod("setConfig", {"key": key, "value": value});
+  }
+
+  /// 额外配置
+  static setVibration(int value) async {
+    await channel.invokeMethod("setVibration", value);
   }
 }

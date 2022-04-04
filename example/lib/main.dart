@@ -35,9 +35,7 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
 
     // await WoshilllFlutterPlugin.setConfig("volumeFlag", true);
-    var a = await WoshilllFlutterPlugin.getBrightness();
-    var b = await WoshilllFlutterPlugin.setBrightness(.1);
-    var c = await WoshilllFlutterPlugin.getBrightness();
+    var a = await WoshilllFlutterPlugin.setVibration(1000);
   }
 
   @override
